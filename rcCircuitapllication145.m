@@ -9,21 +9,24 @@ va = 10;
 n = length(V); %returns the length of the largest array dimension in the input V
 fprintf("The voltage after 0.25s is %.2f V.\n",V(n))
 
+%solve for 0.5s
 [t,V] = ode45(@(t,V) (va-V)/RC, [0 0.5],vi);
 n = length(V); 
-fprintf("The voltage after 0.25s is %.2f V.\n",V(n))
+fprintf("The voltage after 0.5s is %.2f V.\n",V(n))
 
+%solve for 1s
 [t,V] = ode45(@(t,V) (va-V)/RC, [0 1],vi);
 n = length(V); 
-fprintf("The voltage after 0.25s is %.2f V.\n",V(n))
+fprintf("The voltage after 1s is %.2f V.\n",V(n))
 
 %logical comparison
 near8V = V>7.9 & V<8.1;
 time8V = t(near8V);
 
 %report outputs
-fprintf("It will take %.2f seconds for the voltage to reach 8 volts",time8V)
+fprintf("It will take %.2f seconds for the voltage to reach 8 volts\n",time8V)
+plot(t,V)
 ylim([0 10])
-
-
-
+title("The capacitor voltage in a RC Ciruit")
+xlabel("Time(s)")
+ylabel("The Voltage(V)")
